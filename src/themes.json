@@ -1,0 +1,38 @@
+{
+  "light": {
+    "body": {
+      "background": "#ffffff",
+      "color": "#000000"
+    },
+    "card": {
+      "background": "#d4d5d6",
+      "color": "white",
+      "border": "2px solid #f4f5f7",
+      "padding": "10px",
+      "borderRadius": "15px"
+    },
+    "button": {
+      "background": "#ffffff",
+      "color": "#f2f2f2",
+      "borderColor": "61dafb"
+    }
+  },
+  "dark": {
+    "body": {
+      "background": "#282c34",
+      "color": "#ffffff"
+    },
+    "card": {
+      "background": "orange",
+      "color": "#f2f2f2",
+      "border": " 2px solid #dbad6c",
+      "padding": "10px",
+      "borderRadius": "15px"
+    },
+    "button": {
+      "background": "#000000",
+      "color": "orange",
+      "borderColor": "orange"
+    }
+  }
+}
