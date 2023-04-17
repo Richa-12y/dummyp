@@ -50,3 +50,12 @@
   align-items: flex-start;
   justify-content: flex-start;
 }
+.stylefortext {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+}
+.icon_container {
+  display: flex;
+}

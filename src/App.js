@@ -2,25 +2,19 @@ import { createContext, useState } from "react";
 import "./App.css";
 import themes from "./themes.json";
 import { Button, Toggle } from "rsuite";
-import PlusIcon from "@rsuite/icons/Plus";
-import { Input, InputGroup } from "rsuite";
-import { DatePicker, Stack } from "rsuite";
 import Todo from "./components/Todo";
 import Progress from "./components/Progress";
 import TaskCompeted from "./components/TaskCompeted";
 import { Modal } from "rsuite";
 import RemindOutlineIcon from "@rsuite/icons/RemindOutline";
+import InputFrom from "./components/InputFrom";
 
 export const ThemesContext = createContext();
-
-const styles = {
-  width: 300,
-  marginBottom: 10,
-};
 
 function App() {
   // console.log(themes);
   const [selectedThemes, setSelectedThemes] = useState("light");
+
   // console.log(themes[selectedThemes].body.background);
   // console.log(themes[selectedThemes].body.color);
 
@@ -42,35 +36,23 @@ function App() {
   };
   // console.log(themData);
   const [open, setOpen] = useState(false);
-  const [addText, setAddText] = useState("");
-  const [currentDate, setCurrentDate] = useState(Date.now());
+  /**
+   * const text = '[ "Ford", "BMW", "Audi", "Fiat" ]';
+   * const myArr = JSON.parse(text);
+   * o/p=Ford,BMW,Audi,Fiat
+   *When receiving data from a web server, the data is always a string.
+    Parse the data with JSON.parse(), and the data becomes a JavaScript object.
+   */
   const [todoList, setTodoList] = useState(
-    JSON.stringify(localStorage.setItem("todo", "HELLO"))
+    JSON.parse(localStorage.getItem("todo") ?? [])
   );
+  // JSON.stringify(localStorage.setItem("todo", "HELLO"))
   // console.log(todoList);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   // console.log(todoList);
   // console.log(addText);
-
-  const addTasktoTodo = () => {
-    if (addText === "") {
-      handleOpen();
-      return;
-    }
-    let taskDetailsList = {
-      progress: [],
-      todo: [
-        {
-          addText: addText,
-          date: currentDate,
-        },
-      ],
-      taskdone: [],
-    };
-    setTodoList(taskDetailsList);
-  };
 
   // console.log(currentDate);
   return (
@@ -118,35 +100,11 @@ function App() {
               borderRadius: themes[selectedThemes].card.borderRadius,
             }}
           >
-            <InputGroup style={styles}>
-              <Input
-                placeholder="Add Task"
-                value={addText}
-                onChange={(e) => setAddText(e)}
-              />
-              <InputGroup.Addon>
-                <PlusIcon />
-              </InputGroup.Addon>
-            </InputGroup>
-            <Stack direction="column" alignItems="flex-start" spacing={6}>
-              <DatePicker
-                format="yyyy-MM-dd HH:mm:ss"
-                style={styles}
-                onChange={(e) => setCurrentDate(e)}
-              />
-            </Stack>
-            <Button
-              color="green"
-              appearance="primary"
-              style={styles}
-              onClick={addTasktoTodo}
-            >
-              Add Task
-            </Button>
+            <InputFrom handleOpen={handleOpen} setTodoList={setTodoList} />
           </div>
         </div>
         <div className="todo_container">
-          <Todo />
+          <Todo setTodoList={setTodoList} todoList={todoList} />
           <Progress />
           <TaskCompeted />
         </div>
