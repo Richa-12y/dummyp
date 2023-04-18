@@ -44,7 +44,7 @@ function App() {
     Parse the data with JSON.parse(), and the data becomes a JavaScript object.
    */
   const [todoList, setTodoList] = useState(
-    JSON.parse(localStorage.getItem("todo") ?? [])
+    JSON.parse(localStorage.getItem("todo")) ?? []
   );
   // JSON.stringify(localStorage.setItem("todo", "HELLO"))
   // console.log(todoList);
@@ -105,8 +105,8 @@ function App() {
         </div>
         <div className="todo_container">
           <Todo setTodoList={setTodoList} todoList={todoList} />
-          <Progress />
-          <TaskCompeted />
+          <Progress setTodoList={setTodoList} todoList={todoList} />
+          <TaskCompeted setTodoList={setTodoList} todoList={todoList} />
         </div>
       </div>
     </ThemesContext.Provider>

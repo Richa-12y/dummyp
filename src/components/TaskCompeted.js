@@ -1,7 +1,9 @@
 import { useContext } from "react";
 import { ThemesContext } from "../App";
-const TaskCompeted = () => {
+const TaskCompeted = ({ setTodoList, todoList }) => {
   const { themes } = useContext(ThemesContext);
+  let todoListForProgress = JSON.parse(localStorage.getItem("todo"));
+
   return (
     <div
       style={{
@@ -13,6 +15,22 @@ const TaskCompeted = () => {
       }}
     >
       TaskCompeted
+      {todoList?.taskdone
+        ?.sort((a, b) => new Date(b.date) - new Date(a.date))
+        ?.map((el, i) => {
+          return (
+            <div
+              key={i}
+              className="stylefortext"
+              style={{
+                color: "green",
+              }}
+            >
+              <div>{i + 1}</div>
+              <div>{el?.addText}</div>
+            </div>
+          );
+        })}
     </div>
   );
 };
